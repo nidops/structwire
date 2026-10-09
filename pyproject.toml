@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "structwire"
+dynamic = ["version"]
+description = "A small schema-driven binary payload codec for Python."
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Nidhal Abidi"}]
+keywords = ["binary", "codec", "schema", "embedded", "payload", "bitfield", "yaml"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
+]
+dependencies = ["PyYAML>=6.0"]
+
+[project.urls]
+Homepage = "https://github.com/nidops/structwire"
+Documentation = "https://github.com/nidops/structwire/blob/master/docs/SCHEMA.md"
+Source = "https://github.com/nidops/structwire"
+Issues = "https://github.com/nidops/structwire/issues"
+
+[project.optional-dependencies]
+test = ["pytest>=8", "hypothesis>=6", "readme-renderer[md]>=44"]
+dev = [
+  "build>=1.2",
+  "coverage>=7",
+  "mypy>=1.13",
+  "pytest>=8",
+  "hypothesis>=6",
+  "ruff>=0.8",
+  "twine>=6.2",
+  "packaging>=24.2",
+  "readme-renderer[md]>=44",
+  "types-PyYAML>=6.0.12",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "structwire.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["structwire*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+structwire = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["structwire"]

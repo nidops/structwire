@@ -1,0 +1,35 @@
+# Invented routing keys, not values from any real device or protocol.
+# This is application configuration, not a StructWire schema.
+messages:
+  by_kind:
+    sample:
+      codec: environment_sample
+    status:
+      codec: frame_status
+  by_address:
+    0x10:
+      codec: frame_status
+    0x20:
+      codec: environment_sample
+  address_ranges:
+    - base: 0x40
+      count: 4
+      codec: environment_sample
+      index_name: channel
+
+# Only the nested layout is passed to layout_from_mapping().
+inline_example:
+  kinds:
+    custom:
+      layout:
+        size: 4
+        fields:
+          - name: category
+            type: enum
+            values: {0: basic, 1: extended}
+          - name: count
+            type: uint8
+          - name: ratio
+            type: uint16_le
+            scale: 0.01
+            unit: pct
