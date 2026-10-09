@@ -1,0 +1,13 @@
+# Completely fictional packet envelope used to illustrate application-side routing.
+# The application owns framing, checksums and I/O; StructWire sees only payload bytes.
+# Example: [marker=0xC7][kind=0x21][6-byte payload][checksum]
+uart:
+  messages:
+    sample:
+      match:
+        marker: 0xC7
+        kind: 0x21
+      payload:
+        offset: 2
+        length: 6
+        codec: environment_sample

@@ -1,0 +1,43 @@
+# All layouts and values are fictional teaching examples, not production formats.
+version: 1
+
+codecs:
+  frame_status:
+    description: Synthetic packed record demonstrating enums, bits and scaling.
+    size: 4
+    fields:
+      - name: phase
+        type: enum
+        values: {0: idle, 1: running, 2: paused}
+      - name: ready
+        type: bool
+        offset: 1
+        bitmask: 0x01
+      - name: flagged
+        type: bool
+        offset: 1
+        bitmask: 0x02
+        bitshift: 1
+      - name: value
+        type: uint16_le
+        offset: 2
+        scale: 0.01
+        unit: arbitrary
+
+  environment_sample:
+    description: Synthetic six-byte environmental measurement.
+    size: 6
+    fields:
+      - name: channel
+        type: uint8
+      - name: state
+        type: enum
+        values: {0: idle, 1: sampling, 2: paused}
+      - name: temperature_c
+        type: int16_le
+        scale: 0.01
+        unit: degC
+      - name: humidity_pct
+        type: uint16_le
+        scale: 0.01
+        unit: pct
